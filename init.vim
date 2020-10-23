@@ -1,12 +1,16 @@
 syntax on
+filetype plugin indent on
+
 set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set tabstop=2 softtabstop=2
+set shiftwidth=2
 set smartindent
 set rnu
 set incsearch
 set termguicolors
 set smartcase
+set cmdheight=2
+set updatetime=50
 
 
 call plug#begin()
@@ -17,14 +21,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'vim-scripts/indentpython.vim'
-
+Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 
 "Colour stuff
 Plug 'joshdick/onedark.vim'
-Plug 'gruvbox-community/gruvbox'
+Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
 
 
@@ -34,7 +37,9 @@ Plug 'tomasr/molokai'
 call plug#end()
 
 
-colorscheme onedark 
+colorscheme gruvbox 
+let g:gruvbox_contrast_dark = 'hard'
+let g:airline_theme='gruvbox'
 
 "NerdTree
 map <C-n> :NERDTreeToggle<CR>
