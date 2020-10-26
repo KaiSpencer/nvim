@@ -1,5 +1,4 @@
 syntax on
-filetype plugin indent on
 
 set noerrorbells
 set tabstop=2 softtabstop=2
@@ -17,6 +16,7 @@ call plug#begin()
 Plug 'scrooloose/nerdTree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'jiangmiao/auto-pairs'
@@ -24,6 +24,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
+" Telescope stuff
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
 
 "Colour stuff
 Plug 'joshdick/onedark.vim'
@@ -36,6 +40,12 @@ Plug 'tomasr/molokai'
 
 call plug#end()
 
+"Telescope open 
+nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
+nnoremap <Leader>f :lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({}))<cr>
+nnoremap <Leader>p <cmd>lua require'telescope.builtin'.find_files{}<CR>
+
+
 
 colorscheme gruvbox 
 let g:gruvbox_contrast_dark = 'hard'
@@ -47,7 +57,9 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-
+" Quickly open/reload vim
+nnoremap <leader>ev :split $MYVIMRC<CR>  
+nnoremap <leader>sv :source $MYVIMRC<CR>  
 
 
 " use <tab> for trigger completion and navigate to the next complete item
