@@ -25,6 +25,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'jremmen/vim-ripgrep'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 " Telescope stuff
 Plug 'nvim-lua/popup.nvim'
@@ -35,8 +36,7 @@ Plug 'nvim-lua/telescope.nvim'
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
-
-
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 
 
@@ -44,7 +44,7 @@ call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:airline_theme='gruvbox'
-colorscheme gruvbox 
+colorscheme gruvbox  
 
 "NerdTree
 map <C-n> :NERDTreeToggle<CR>
@@ -70,6 +70,15 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "c", "rust" },  -- list of language that will be disabled
+  },
+}
+EOF
 
 let mapleader = ' '
 nnoremap <leader>h :wincmd h<CR>
@@ -94,6 +103,12 @@ nnoremap <Leader>p <cmd>lua require'telescope.builtin'.git_files{}<CR>
 "noremap <Leader>en <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/" }<CR>
 "nnoremap <c-p> :lua require'telescope.builtin'.find_files{}<CR>
 
+
 nnoremap <silent>vs :vsplit<enter><CR>  
 nnoremap <silent>hs :split<enter><CR>
 nnoremap <leader>t :vsplit <bar> :wincmd l <bar> :terminal <CR>
+
+" Open nvimrc file
+nnoremap <Leader>v :vsp ~/.config/nvim/init.vim<CR>
+" Source nvimrc file
+nnoremap <Leader>sv :source ~/.config/nvim/init.vim<CR>
