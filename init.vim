@@ -98,10 +98,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "Telescope issue open, git files working only
 
 "nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
+nnoremap <Leader>fi :lua require'telescope.builtin'.find_files()<cr>
 "nnoremap <Leader>f :lua require'telescope.builtin'.git_files(require('telescope.themes').get_dropdown({}))<cr>
-nnoremap <Leader>p <cmd>lua require'telescope.builtin'.git_files{}<CR>
-"noremap <Leader>en <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/" }<CR>
-"nnoremap <c-p> :lua require'telescope.builtin'.find_files{}<CR>
+nnoremap <Leader>f <cmd>lua require'telescope.builtin'.git_files{}<CR>
 
 
 nnoremap <silent>vs :vsplit<enter><CR>  
