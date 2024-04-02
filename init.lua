@@ -548,9 +548,21 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {
+          on_attach = function(client)
+            -- this is important, otherwise tsserver will format ts/js
+            -- files which we *really* don't want.
+            client.server_capabilities.documentFormattingProvider = false
+          end,
+        },
         --
         terraformls = {},
+
+        tailwindcss = {},
+
+        biome = {},
+
+        astro = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -632,6 +644,8 @@ require('lazy').setup({
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
+        typescript = { 'biome' },
+        typescriptreact = { 'biome' },
       },
     },
   },
@@ -804,7 +818,21 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'terraform', 'hcl' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'vim',
+        'vimdoc',
+        'terraform',
+        'hcl',
+        'gitcommit',
+        'typescript',
+        'astro',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -875,5 +903,6 @@ require('lazy').setup({
 -- [[ NvimTree Configuration ]]
 vim.keymap.set('n', '<M-p>', require('nvim-tree.api').tree.toggle, { desc = 'Nvim Tree Open' })
 
+-- require('nvim-treesitter.install').compilers = { 'clang' }
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
