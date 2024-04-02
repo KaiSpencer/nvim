@@ -73,6 +73,15 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
+  {
+    'zbirenbaum/copilot.lua',
+    lazy = false,
+    cmd = "Copilot",
+    config = function()
+      require('copilot').setup({})
+    end
+  },
+
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
